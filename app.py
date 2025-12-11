@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 
 # Page configuration
 st.set_page_config(
-    page_title="🐔 Chicken Detection System شركة الدجاج الواااااعرة",
+    page_title="🐔 Chicken Detection System شركة الدجاج الواااااقفة",
     page_icon="🐔",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -393,5 +393,6 @@ st.markdown("""
         <p>Chicken Detection System v1.0 | Powered by YOLOv8 🐔</p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
