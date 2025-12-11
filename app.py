@@ -60,7 +60,7 @@ def load_model(model_path):
         return None
 
 # Update this path to your model location
-MODEL_PATH = MODEL_PATH = './models/best.pt'
+MODEL_PATH = './models/best.pt'
 # For local deployment, you might want to use:
 # MODEL_PATH = './models/best.pt'
 
@@ -393,6 +393,7 @@ st.markdown("""
         <p>Chicken Detection System v1.0 | Powered by YOLOv8 🐔</p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
