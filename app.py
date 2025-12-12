@@ -43,13 +43,24 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Title
-st.markdown('<h1 class="main-header">🐔 Chicken Detection System شركة الدجاج شركة واااااقفة</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-header">🐔 Chicken Detection System </h1>', unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <div style='text-align: center; color: white; background-color: transparent;'>
+        <p style='font-size: 16px;'>
+            شركة الدجاج شركة واااااقفة
+        </p>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
 
 st.markdown(
     """
     <div style='text-align: center; color: purple;'>
         <h3>Rayen Hamdaoui -- Hedi Nemer</h3>
-        <h3>Hakim Moahemmed Aziz -- Meddeb Youssef</h3>
+        <h3>Hakim Mohammed Aziz -- Meddeb Youssef</h3>
     </div>
     """, 
     unsafe_allow_html=True
@@ -460,6 +471,7 @@ st.markdown("""
         <p>Chicken Detection System v1.0 | Powered by YOLOv8 🐔</p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
