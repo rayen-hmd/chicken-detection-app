@@ -14,6 +14,7 @@ import tempfile
 import os
 from ultralytics import YOLO
 import matplotlib.pyplot as plt
+import gdown
 
 # Page configuration
 st.set_page_config(
@@ -59,44 +60,68 @@ def load_model(model_path):
         st.error(f"Error loading model: {e}")
         return None
 
-# Update this path to your model location
-MODEL_PATH = 'models/best.pt'
-# For local deployment, you might want to use:
-# MODEL_PATH = './models/best.pt'
 
+@st.cache_resource
+def download_and_load_model():
+    """Download model from Google Drive and load it"""
+    model_path = 'models/best.pt'
+    
+    # Always check if file is Git LFS pointer
+    needs_download = False
+    
+    if os.path.exists(model_path):
+        file_size = os.path.getsize(model_path)
+        
+        # If file is suspiciously small (< 1MB), it's likely a Git LFS pointer
+        if file_size < 1024 * 1024:  # Less than 1MB
+            st.warning(f"⚠️ Model file is only {file_size} bytes. Downloading actual model from Google Drive...")
+            os.remove(model_path)
+            needs_download = True
+    else:
+        needs_download = True
+    
+    if needs_download:
+        os.makedirs('models', exist_ok=True)
+        
+        # YOUR GOOGLE DRIVE FILE ID - REPLACE THIS!
+        file_id = '1VBnwiGuzU-Q6yjiwWHLj_0QBVVmkBX_A'
+        url = f'https://drive.google.com/uc?id={file_id}'
+        
+        try:
+            with st.spinner('📥 Downloading model from Google Drive... (this will take a minute)'):
+                gdown.download(url, model_path, quiet=False)
+            
+            # Verify download
+            new_size = os.path.getsize(model_path)
+            st.success(f'✅ Model downloaded successfully! Size: {new_size / (1024*1024):.2f} MB')
+        except Exception as e:
+            st.error(f'❌ Failed to download model: {e}')
+            st.error('Please check your Google Drive file ID and sharing settings.')
+            st.stop()
+    
+    # Load model
+    try:
+        model = YOLO(model_path)
+        return model
+    except Exception as e:
+        st.error(f'❌ Failed to load model: {e}')
+        st.stop()
 
-
-
-#####
-st.write("Checking model file...")
-
-model_path = 'models/best.pt'
-file_size = os.path.getsize(model_path)
-
-st.write(f"Model file size: {file_size} bytes ({file_size / (1024*1024):.2f} MB)")
-
-# Read first few bytes
-with open(model_path, 'rb') as f:
-    first_bytes = f.read(100)
-    st.write(f"First bytes: {first_bytes[:50]}")
-
-# If it's a Git LFS pointer, it will show text like "version https://git-lfs..."
-if b'version https://git-lfs' in first_bytes:
-    st.error("❌ This is a Git LFS pointer file, not the actual model!")
-else:
-    st.success("✓ This appears to be a valid model file")
-########
-
-
-
-
-
-
-model = load_model(MODEL_PATH)
+model = download_and_load_model()
 
 if model is None:
     st.error("⚠️ Failed to load model. Please check the model path.")
     st.stop()
+
+
+
+
+
+
+
+
+
+
 
 # ============================================================================
 # SIDEBAR - Settings and Controls
@@ -421,6 +446,7 @@ st.markdown("""
         <p>Chicken Detection System v1.0 | Powered by YOLOv8 🐔</p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
