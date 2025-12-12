@@ -18,7 +18,7 @@ import gdown
 
 # Page configuration
 st.set_page_config(
-    page_title="🐔 Chicken Detection System شركة الدجاج الواااااقفة",
+    page_title="🐔 Chicken Detection System ",
     page_icon="🐔",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -43,7 +43,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Title
-st.markdown('<h1 class="main-header">🐔 Chicken Detection System شركة الدجاج الواااااعرة</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-header">🐔 Chicken Detection System شركة الدجاج شركة واااااقفة</h1>', unsafe_allow_html=True)
 st.markdown("### Upload images to detect and count chickens automatically")
 
 # ============================================================================
@@ -446,6 +446,7 @@ st.markdown("""
         <p>Chicken Detection System v1.0 | Powered by YOLOv8 🐔</p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
