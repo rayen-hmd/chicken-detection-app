@@ -64,12 +64,33 @@ MODEL_PATH = 'models/best.pt'
 # For local deployment, you might want to use:
 # MODEL_PATH = './models/best.pt'
 
-st.write("Current directory:", os.getcwd())
-st.write("Files in current directory:", os.listdir('.'))
-if os.path.exists('models'):
-    st.write("Files in models folder:", os.listdir('models'))
+
+
+
+#####
+st.write("Checking model file...")
+
+model_path = 'models/best.pt'
+file_size = os.path.getsize(model_path)
+
+st.write(f"Model file size: {file_size} bytes ({file_size / (1024*1024):.2f} MB)")
+
+# Read first few bytes
+with open(model_path, 'rb') as f:
+    first_bytes = f.read(100)
+    st.write(f"First bytes: {first_bytes[:50]}")
+
+# If it's a Git LFS pointer, it will show text like "version https://git-lfs..."
+if b'version https://git-lfs' in first_bytes:
+    st.error("❌ This is a Git LFS pointer file, not the actual model!")
 else:
-    st.error("❌ 'models' folder not found!")
+    st.success("✓ This appears to be a valid model file")
+########
+
+
+
+
+
 
 model = load_model(MODEL_PATH)
 
@@ -400,6 +421,7 @@ st.markdown("""
         <p>Chicken Detection System v1.0 | Powered by YOLOv8 🐔</p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
