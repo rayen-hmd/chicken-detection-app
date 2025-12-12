@@ -64,6 +64,13 @@ MODEL_PATH = 'models/best.pt'
 # For local deployment, you might want to use:
 # MODEL_PATH = './models/best.pt'
 
+st.write("Current directory:", os.getcwd())
+st.write("Files in current directory:", os.listdir('.'))
+if os.path.exists('models'):
+    st.write("Files in models folder:", os.listdir('models'))
+else:
+    st.error("❌ 'models' folder not found!")
+
 model = load_model(MODEL_PATH)
 
 if model is None:
@@ -393,6 +400,7 @@ st.markdown("""
         <p>Chicken Detection System v1.0 | Powered by YOLOv8 🐔</p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
