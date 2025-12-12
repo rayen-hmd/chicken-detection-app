@@ -44,8 +44,7 @@ st.markdown("""
 
 # Title
 st.markdown('<h1 class="main-header">🐔 Chicken Detection System </h1>', unsafe_allow_html=True)
-
-st.markdown(
+""" st.markdown(
     """
     <div style='text-align: center; color: white; background-color: transparent;'>
         <p style='font-size: 16px;'>
@@ -54,8 +53,7 @@ st.markdown(
     </div>
     """, 
     unsafe_allow_html=True
-)
-
+) """
 st.markdown(
     """
     <div style='text-align: center; color: purple;'>
@@ -471,6 +469,7 @@ st.markdown("""
         <p>Chicken Detection System v1.0 | Powered by YOLOv8 🐔</p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
